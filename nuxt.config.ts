@@ -7,5 +7,13 @@ export default defineNuxtConfig({
   ],
   build: {
     transpile: ['bootstrap'],
+  },
+  app: {
+    head: {
+      title: 'Super Task',
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/logo.png' },
+      ],
+    },
   }
 })
