@@ -1,5 +1,7 @@
 'use strict';
 
+import user from '~/models/user';
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -7,12 +9,14 @@ module.exports = {
       {
         title: 'Trabalho',
         color: '#CDB4DB',
+        userId: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         title: 'Escola',
         color: '#A2D2FF',
+        userId: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
