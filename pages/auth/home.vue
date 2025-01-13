@@ -48,10 +48,13 @@ const updateTaskStatus = async (id, currentStatus) => {
 <template>
     <div class="container-fluid p-5">
 
-        <ButtonAction label="Nova Tarefa" route="/auth/create" />
-
+        <div class="d-flex gap-3">
+            <ButtonAction label="Novo Tipo" route="/auth/type/create" />
+            <ButtonAction label="Nova Tarefa" route="/auth/task/create" />
+        </div>
+        
         <h2 class="my-4">Suas tarefas</h2>
-
+        
         <Alert :message="message" />
         <!-- {{ tasks }} -->
 

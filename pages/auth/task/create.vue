@@ -55,7 +55,7 @@ const submitForm = async () => {
   <div class="container-fluid p-5">
 
 
-    <h2>{{ taskId ? 'Editar Tarefa' : 'Nova Tarefa' }}</h2>
+    <h2>Nova Tarefa</h2>
 
     <Alert :message="message" />
 
