@@ -1,6 +1,8 @@
 import { defineEventHandler, readBody } from 'h3';
 import db from '~/models/index.js';
 
+// POST /api/types/create
+// Cria um novo tipo
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);

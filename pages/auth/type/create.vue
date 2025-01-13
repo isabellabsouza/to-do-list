@@ -7,6 +7,7 @@ const message = ref('');
 
 const { createType } = useCreateType();
 
+// Função para criar um novo tipo
 const submitForm = async () => {
     try {
         const response = await createType({

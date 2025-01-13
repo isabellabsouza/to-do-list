@@ -1,6 +1,7 @@
-// /api/tasks/[id]/status.js
 import db from '~/models/index.js';
 
+// PUT /api/tasks/status/:id
+// Atualiza o status de uma tarefa pelo ID
 export default defineEventHandler(async (event) => {
     const { id } = event.context.params;
     const { status } = await readBody(event);

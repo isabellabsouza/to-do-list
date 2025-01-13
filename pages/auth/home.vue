@@ -4,6 +4,7 @@ const tasks = await useFetchTasksByType();
 
 const message = ref('');
 
+// Função para atualizar o status de uma tarefa clicando no checkbox
 const updateTaskStatus = async (id, currentStatus) => {
     const newStatus = currentStatus === 'Concluído' ?  'Em andamento' : 'Concluído';
     const task = tasks.value.flatMap(group => group.tasks).find(task => task.id === id);
@@ -56,7 +57,6 @@ const updateTaskStatus = async (id, currentStatus) => {
         <h2 class="my-4">Suas tarefas</h2>
         
         <Alert :message="message" />
-        <!-- {{ tasks }} -->
 
         <div v-if="tasks && Object.keys(tasks).length > 0">
             <div class="row">

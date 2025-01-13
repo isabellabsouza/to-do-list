@@ -1,6 +1,8 @@
 import { defineEventHandler } from 'h3';
 import db from '~/models/index.js';
 
+// DELETE /api/tasks/:id
+// Exclui uma tarefa pelo ID
 export default defineEventHandler(async (event) => {
   try {
     const { id } = event.context.params;

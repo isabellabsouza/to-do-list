@@ -1,6 +1,8 @@
 import { defineEventHandler, readBody } from 'h3';
 import db from '~/models/index.js';
 
+// POST /api/tasks/create
+// Cria uma nova tarefa
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);

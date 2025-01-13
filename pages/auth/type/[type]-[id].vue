@@ -8,6 +8,7 @@ const tasks = await useFetchTasks(route.params.id);
 const { deleteTask } = useDeleteTasks();
 const message = ref('');
 
+// Função para excluir uma tarefa
 const removeTask = async (id) => {
     try {
         const response = await deleteTask(id);

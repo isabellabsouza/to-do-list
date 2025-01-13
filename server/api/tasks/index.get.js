@@ -1,5 +1,7 @@
 import db from '~/models/index.js'
 
+// GET /api/tasks
+// Busca todas as tarefas, por tipo
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
     const { typeId } = query;
