@@ -60,18 +60,7 @@ npx sequelize db:migrate
 No seu banco de dados, é para o schema ter 4 tabelas (sequelizemeta, tasks, types, users).
 
 4. Crie um usuário
-Você pode criar um usuário direto no banco de dados (a funcionalidade de usuários foi implementada somente a estrutura, não foi possível finalizar a funcionalidade de autenticação) ou então rodar uma seeder.
-Para rodar a seeder, no arquivo package.json adicione:
-```json
-{
-  "type": "module",
-  ...
-}
-```
-e depois rode a seeder:
-```bash
-npx sequelize-cli db:seed:all
-```
+Você pode criar um usuário direto no banco de dados (a funcionalidade de usuários foi implementada somente a estrutura, não foi possível finalizar a funcionalidade de autenticação).
 
 5. Rode o projeto
 ```bash
