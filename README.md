@@ -1,75 +1,86 @@
-# Nuxt Minimal Starter
+# Super Task
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Software para gerenciamento de tarefas
 
-## Setup
+## Pré-requisitos
+- Node.js (versão 16 ou superior recomendada)
+- MySQL
+- IDE
 
-Make sure to install dependencies:
+## Configuração do ambiente
+### 1. Download do projeto
+Na branch main, clonar esse repositório ou baixar a pasta zip e abrir o projeto na sua IDE.
+
+### 2. Instale as dependências
+Instale as dependências do projeto com o gerenciador de pacotes de sua escolha:
 
 ```bash
-# npm
+#Usando NPM
 npm install
 
-# pnpm
-pnpm install
-
-# yarn
+#Usando Yarn
 yarn install
+```
+### 3. Configure o Banco de Dados
+1. No seu banco MySQL local, crie um schema chamado todolist
+2. Crie na raiz do projeto uma pasta chamada config, e dentro dela um arquivo chamado config.json, que deve ter a estrutura abaixo.
+   Em seguida, altere o valor de "password" dentro de "development", colocando a sua senha do MySQL. 
+```bash
+{
+  "development": {
+    "username": "root",
+    "password": "SUA SENHA",
+    "database": "todolist",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
 
-# bun
-bun install
+```
+3. Instale a CLI do sequelize e execute as migrations
+```bash
+npm install sequelize-cli --save-dev
+
+npx sequelize db:migrate
+```
+No seu banco de dados, é para o schema ter 4 tabelas (sequelizemeta, tasks, types, users).
+
+4. Crie um usuário
+Você pode criar um usuário direto no banco de dados (a funcionalidade de usuários foi implementada somente a estrutura, não foi possível finalizar a funcionalidade de autenticação) ou então rodar uma seeder.
+Para rodar a seeder, no arquivo package.json adicione:
+```json
+{
+  "type": "module",
+  ...
+}
+```
+e depois rode a seeder:
+```bash
+npx sequelize-cli db:seed:all
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
+5. Rode o projeto
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## Observações
+1. Foi iniciada a funcionalidade de autenticação, por isso existe no banco uma tabela users e as buscas são feitas filtrando pelo usuário de id 1, porém não foi possível concluir. Então quando aparecer a página de Login, basta clicar no botão entrar sem preencher o formulário que você será redirecionado para tela com as tarefas.
 
-Build the application for production:
+2. Além da tabela de tarefas (tasks) existe também um de tipos (types). Para criar uma tarefa é necessário primeiro criar um tipo. O tipo organiza as tarefas em categorias.
 
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+3. É possível mudar o status de uma tarefa clicando no checkbox na página Home (será marcada como concluída) ou alterando o status pelo select menu nas páginas dos tipos, que detalham as informações das tarefas
