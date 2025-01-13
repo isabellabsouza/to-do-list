@@ -5,13 +5,6 @@ export default defineEventHandler(async (event) => {
   try {
     const { id } = event.context.params;
 
-    if (!id) {
-      return {
-        success: false,
-        message: 'ID da tarefa não fornecido.',
-      };
-    }
-
     const deletedTask = await db.Task.destroy({
       where: { id: id },
     });

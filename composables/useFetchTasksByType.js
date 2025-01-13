@@ -1,7 +1,5 @@
-export default async (typeId) => {
-    const {data, error} = await useFetch('/api/tasks', {
-        query: {typeId}
-    });
+export default async () => {
+    const {data, error} = await useFetch('/api/types');
 
     if(error.value) {
         throw createError({

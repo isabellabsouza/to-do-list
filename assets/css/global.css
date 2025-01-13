@@ -1,0 +1,25 @@
+:root{
+  --purple: #CDB4DB;
+  --purple-hover: #daaff3;
+  --pink-bg: #FFC8DD;
+  --pink: #FFAFCC;
+  --dark-blue: #BDE0FE;
+  --blue: #A2D2FF;
+}
+
+body {
+  font-family: "Fira Code", serif;
+  background-color: black;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  font-family: "Fira Code", serif;
+}
+

@@ -1,11 +1,25 @@
+<script>
+definePageMeta({
+    layout: "unrestricted",
+})
+</script>
+
 <template>
-    <div class="d-flex justify-content-center align-items-center min-vh-100">
-        <div class="container" style="max-width: 400px;">
-            <div class="card">
+    <div class="
+        d-flex 
+        justify-content-center 
+        align-items-center 
+        position-absolute 
+        top-50 
+        start-50 
+        translate-middle"
+        style="width: 400px;"
+    >
+        <div class="container">
+            <div class="card bg-black">
                 <div class="card-body">
                     <h3 class="card-title text-center mb-4">Login</h3>
 
-                    <!-- Formulário de Login -->
                     <form>
                         <div class="mb-3">
                             <label for="username" class="form-label">Usuário</label>
@@ -18,20 +32,22 @@
                             <input type="password" class="form-control" id="password" placeholder="Digite sua senha"
                                 required>
                         </div>
+                        <NuxtLink to="/auth/home">
 
-                        <div class="d-flex justify-content-between mb-4">
-                            <div>
-                                <input type="checkbox" id="rememberMe">
-                                <label for="rememberMe" class="form-check-label">Lembrar-me</label>
-                            </div>
-                            <a href="#" class="text-decoration-none">Esqueceu a senha?</a>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                            <ButtonSubmit label="Entrar" />
+                        </NuxtLink>
+                        
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
+
+<style scoped>
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #CDB4DB;
+}
+</style>

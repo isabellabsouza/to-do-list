@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
       description: body.description,
       date: body.date,
       status: body.status,
-      typeId: 1,
+      typeId: body.typeId,
       userId: 1
     });
 

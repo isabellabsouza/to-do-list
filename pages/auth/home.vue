@@ -1,40 +1,97 @@
 <script setup>
 import { ref } from 'vue';
-const tasks = await useFetchTasks();
+const tasks = await useFetchTasksByType();
 
 const message = ref('');
-const { deleteTask } = useDeleteTasks();
 
-const removeTask = async (id) => {
+const updateTaskStatus = async (id, currentStatus) => {
+    const newStatus = currentStatus === 'Concluído' ?  'Em andamento' : 'Concluído';
+    const task = tasks.value.flatMap(group => group.tasks).find(task => task.id === id);
+    
     try {
-        const response = await deleteTask(id);
-        if (response.success) {
-            message.value = 'Tarefa excluída com sucesso!';
-            // Remover a tarefa da lista local
-            tasks.value = tasks.value.filter((task) => task.id !== id);
-        } else {
-            message.value = `Erro: ${response.message}`;
+        const response = await fetch(`/api/tasks/status/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status: newStatus }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao atualizar o status da tarefa');
         }
+
+        const updatedTask = tasks.value.flatMap(group => group.tasks).find(task => task.id === id);
+        if (updatedTask) {
+            updatedTask.status = newStatus;
+        }
+
+        message.value = {
+            success: true,
+            message: `Status da tarefa "${updatedTask.title}" atualizado para "${newStatus}".`
+        };
     } catch (error) {
-        message.value = error.message;
+        console.error('Erro ao atualizar o status:', error);
+        message.value = {
+            success: false,
+            message: 'Erro ao atualizar o status. Tente novamente.'
+        };
+    } finally {
+        setTimeout(() => {
+            message.value = '';
+        }, 3000);
     }
 };
 
 </script>
 
 <template>
-    <h1>HOME</h1>
-    <button class="btn btn-primary">Nova Tarefa</button>
-    <h2>Listagem de tarefas</h2>
-    {{ tasks }}
+    <div class="container-fluid p-5">
 
+        <ButtonAction label="Nova Tarefa" route="/auth/create" />
 
-    <ul class="list-group">
-        <li v-for="task in tasks" :key="task.id"
-            class="list-group-item d-flex justify-content-between align-items-center">
-            {{ task.title }}
-            <button @click="removeTask(task.id)" class="btn btn-danger btn-sm">Excluir</button>
-        </li>
-    </ul>
-    <p v-if="message">{{ message }}</p>
+        <h2 class="my-4">Suas tarefas</h2>
+
+        <Alert :message="message" />
+        <!-- {{ tasks }} -->
+
+        <div v-if="tasks && Object.keys(tasks).length > 0">
+            <div class="row">
+                <div v-for="(group, typeId) in tasks" :key="typeId" class="col-md-4 mb-4 custom-card" >
+                    <div class="card pt-3 " :style="{ backgroundColor: group.color }">
+                        <div class="card-header text-center">
+                            <NuxtLink :to="`/auth/type/${group.title}-${group.id}`" style="text-decoration: none">
+                                <h5 style="cursor: pointer; color: white">{{ group.title }}</h5>
+                            </NuxtLink>
+                        </div>
+
+                        <div class="card-body">
+                            <ul>
+                                <li v-for="task in group.tasks" :key="task.id" class="list-group-item">
+
+                                    <div class="d-flex gap-2">
+                                        <input type="checkbox" :checked="task.status === 'Concluído'"
+                                            @change="updateTaskStatus(task.id, task.status)" />
+                                        <p :class="{ 'text-decoration-line-through': task.status === 'Concluído' }" class="mb-0">
+                                            {{ task.title }}
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
+
+<style scoped>
+.custom-card {
+    transition: background-color 0.3s ease;
+}
+
+.custom-card:hover {
+    filter: brightness(1.5);
+}
+</style>
