@@ -1,12 +1,9 @@
-<!-- <script setup>
-    useHead({
-        title: "Super Task"
-    });
-</script> -->
 <template>
-
-    <Navbar />
-    <NuxtPage />
-    <Footer />
-
+    
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    </head>
+    <NuxtLayout>
+        <NuxtPage />
+    </NuxtLayout>
 </template>

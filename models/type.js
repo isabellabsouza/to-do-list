@@ -4,12 +4,18 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Type extends Model {
-        //Cada tipo tem muitas tarefas
         static associate(models) {
+            //Cada tipo tem muitas tarefas
             Type.hasMany(models.Task, {
                 foreignKey: 'typeId',
                 as: 'tasks'
             })
+
+            //Cada tipo pertence a um usuário
+            Type.belongsTo(models.User, {
+                foreignKey: 'userId',
+                as: 'user'
+            });
         }
     }
     Type.init({

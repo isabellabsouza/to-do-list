@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'userId',
                 as: 'tasks'
             })
+
+            //Cada usuário tem muitos tipos de tarefas
+            User.hasMany(models.Type, {
+                foreignKey: 'userId',
+                as: 'types'
+            })
         }
     }
     User.init({

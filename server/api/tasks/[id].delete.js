@@ -1,16 +1,11 @@
 import { defineEventHandler } from 'h3';
 import db from '~/models/index.js';
 
+// DELETE /api/tasks/:id
+// Exclui uma tarefa pelo ID
 export default defineEventHandler(async (event) => {
   try {
     const { id } = event.context.params;
-
-    if (!id) {
-      return {
-        success: false,
-        message: 'ID da tarefa não fornecido.',
-      };
-    }
 
     const deletedTask = await db.Task.destroy({
       where: { id: id },

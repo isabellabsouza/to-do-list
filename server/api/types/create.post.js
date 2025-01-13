@@ -1,24 +1,21 @@
 import { defineEventHandler, readBody } from 'h3';
 import db from '~/models/index.js';
 
-// POST /api/tasks/create
-// Cria uma nova tarefa
+// POST /api/types/create
+// Cria um novo tipo
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
 
-    const newTask = await db.Task.create({
+    const newType = await db.Type.create({
       title: body.title,
-      description: body.description,
-      date: body.date,
-      status: body.status,
-      typeId: body.typeId,
+      color: body.color,
       userId: 1
     });
 
     return {
       success: true,
-      data: newTask,
+      data: newType,
     };
   } catch (error) {
     return {

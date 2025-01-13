@@ -5,18 +5,28 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Tasks', [
       {
-        title: 'Fazer alguma coisa para o trabalho',
-        description: "trabalho trabalho trabalho",
+        title: 'Terminar relatório de vendas',
+        description: 'O relatório de vendas tem que ter os dados dos clientes, produtos e vendas.',
         date: new Date(),
-        status: 'Em andamento',
+        status: 'Não iniciado',
         userId: 1,
         typeId: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        title: 'Fazer alguma coisa para a escola',
-        description: "escola escola escola",
+        title: 'Estudar para a prova',
+        description: 'Conteúdos: funções quadráticas, polinômios, frações. Capítulo 4 e 5 da apostila.',
+        date: new Date(),
+        status: 'Em adamento',
+        userId: 1,
+        typeId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        title: 'Projeto de ciências',
+        description: 'Comprar materiais: cartolina, cola quente e EVA.',
         date: new Date(),
         status: 'Concluído',
         userId: 1,
